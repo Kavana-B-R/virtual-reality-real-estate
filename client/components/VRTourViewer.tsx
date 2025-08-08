@@ -1,21 +1,26 @@
-import { useState, useRef, Suspense } from 'react';
-import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { OrbitControls, Html, Text } from '@react-three/drei';
-import { TextureLoader, SphereGeometry, MeshBasicMaterial, DoubleSide } from 'three';
-import { VRScene, VRHotspot } from '@shared/types';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
-import { 
-  ArrowLeft, 
-  RotateCcw, 
-  Home, 
-  Info, 
+import { useState, useRef, Suspense } from "react";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import { OrbitControls, Html, Text } from "@react-three/drei";
+import {
+  TextureLoader,
+  SphereGeometry,
+  MeshBasicMaterial,
+  DoubleSide,
+} from "three";
+import { VRScene, VRHotspot } from "@shared/types";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  ArrowLeft,
+  RotateCcw,
+  Home,
+  Info,
   Navigation,
   Loader2,
   Volume2,
-  VolumeX
-} from 'lucide-react';
+  VolumeX,
+} from "lucide-react";
 
 interface VRTourViewerProps {
   scenes: VRScene[];
@@ -33,7 +38,7 @@ interface VRSphereProps {
 function VRSphere({ imageUrl, hotspots, onHotspotClick }: VRSphereProps) {
   const meshRef = useRef();
   const texture = useLoader(TextureLoader, imageUrl);
-  
+
   useFrame(() => {
     if (meshRef.current) {
       meshRef.current.rotation.y += 0.001; // Subtle rotation
@@ -56,13 +61,13 @@ function VRSphere({ imageUrl, hotspots, onHotspotClick }: VRSphereProps) {
             position={[
               hotspot.position.x * 8,
               hotspot.position.y * 8,
-              hotspot.position.z * 8
+              hotspot.position.z * 8,
             ]}
             onClick={() => onHotspotClick(hotspot)}
           >
             <sphereGeometry args={[0.1, 16, 16]} />
-            <meshBasicMaterial 
-              color={hotspot.type === 'navigation' ? '#10b981' : '#f59e0b'} 
+            <meshBasicMaterial
+              color={hotspot.type === "navigation" ? "#10b981" : "#f59e0b"}
               transparent
               opacity={0.8}
             />
@@ -73,7 +78,7 @@ function VRSphere({ imageUrl, hotspots, onHotspotClick }: VRSphereProps) {
             position={[
               hotspot.position.x * 8,
               hotspot.position.y * 8 + 0.3,
-              hotspot.position.z * 8
+              hotspot.position.z * 8,
             ]}
             distanceFactor={2}
             occlude
@@ -88,12 +93,12 @@ function VRSphere({ imageUrl, hotspots, onHotspotClick }: VRSphereProps) {
             position={[
               hotspot.position.x * 8,
               hotspot.position.y * 8,
-              hotspot.position.z * 8
+              hotspot.position.z * 8,
             ]}
           >
             <ringGeometry args={[0.15, 0.25, 16]} />
-            <meshBasicMaterial 
-              color={hotspot.type === 'navigation' ? '#10b981' : '#f59e0b'} 
+            <meshBasicMaterial
+              color={hotspot.type === "navigation" ? "#10b981" : "#f59e0b"}
               transparent
               opacity={0.3}
             />
@@ -115,13 +120,20 @@ function LoadingFallback() {
   );
 }
 
-export function VRTourViewer({ scenes, currentSceneId, onSceneChange, onExit }: VRTourViewerProps) {
-  const [selectedHotspot, setSelectedHotspot] = useState<VRHotspot | null>(null);
+export function VRTourViewer({
+  scenes,
+  currentSceneId,
+  onSceneChange,
+  onExit,
+}: VRTourViewerProps) {
+  const [selectedHotspot, setSelectedHotspot] = useState<VRHotspot | null>(
+    null,
+  );
   const [isMuted, setIsMuted] = useState(true);
   const [showInfo, setShowInfo] = useState(false);
 
-  const currentScene = scenes.find(scene => scene.id === currentSceneId);
-  
+  const currentScene = scenes.find((scene) => scene.id === currentSceneId);
+
   if (!currentScene) {
     return (
       <div className="h-screen bg-black flex items-center justify-center text-white">
@@ -138,8 +150,8 @@ export function VRTourViewer({ scenes, currentSceneId, onSceneChange, onExit }: 
 
   const handleHotspotClick = (hotspot: VRHotspot) => {
     setSelectedHotspot(hotspot);
-    
-    if (hotspot.type === 'navigation' && hotspot.targetSceneId) {
+
+    if (hotspot.type === "navigation" && hotspot.targetSceneId) {
       // Add small delay for better UX
       setTimeout(() => {
         onSceneChange(hotspot.targetSceneId!);
@@ -148,15 +160,17 @@ export function VRTourViewer({ scenes, currentSceneId, onSceneChange, onExit }: 
     }
   };
 
-  const navigationHotspots = currentScene.hotspots.filter(h => h.type === 'navigation');
-  const infoHotspots = currentScene.hotspots.filter(h => h.type === 'info');
+  const navigationHotspots = currentScene.hotspots.filter(
+    (h) => h.type === "navigation",
+  );
+  const infoHotspots = currentScene.hotspots.filter((h) => h.type === "info");
 
   return (
     <div className="h-screen bg-black relative overflow-hidden">
       {/* VR Canvas */}
       <Canvas
         camera={{ position: [0, 0, 0], fov: 75 }}
-        style={{ height: '100vh', width: '100vw' }}
+        style={{ height: "100vh", width: "100vw" }}
       >
         <Suspense fallback={<LoadingFallback />}>
           <VRSphere
@@ -165,7 +179,7 @@ export function VRTourViewer({ scenes, currentSceneId, onSceneChange, onExit }: 
             onHotspotClick={handleHotspotClick}
           />
         </Suspense>
-        
+
         <OrbitControls
           enablePan={false}
           enableZoom={false}
@@ -189,7 +203,7 @@ export function VRTourViewer({ scenes, currentSceneId, onSceneChange, onExit }: 
               <ArrowLeft className="w-4 h-4 mr-2" />
               Exit VR Tour
             </Button>
-            
+
             <Badge className="bg-emerald-600 text-white">
               {currentScene.name}
             </Badge>
@@ -204,14 +218,18 @@ export function VRTourViewer({ scenes, currentSceneId, onSceneChange, onExit }: 
             >
               <Info className="w-4 h-4" />
             </Button>
-            
+
             <Button
               onClick={() => setIsMuted(!isMuted)}
               variant="secondary"
               size="sm"
               className="bg-black/50 hover:bg-black/70 text-white border-white/20"
             >
-              {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+              {isMuted ? (
+                <VolumeX className="w-4 h-4" />
+              ) : (
+                <Volume2 className="w-4 h-4" />
+              )}
             </Button>
           </div>
         </div>
@@ -249,16 +267,20 @@ export function VRTourViewer({ scenes, currentSceneId, onSceneChange, onExit }: 
           <div className="absolute bottom-4 right-4 pointer-events-auto">
             <Card className="bg-black/80 border-white/20 max-w-sm">
               <CardContent className="p-4">
-                <h3 className="text-white font-semibold mb-2">{currentScene.name}</h3>
+                <h3 className="text-white font-semibold mb-2">
+                  {currentScene.name}
+                </h3>
                 {currentScene.description && (
                   <p className="text-gray-300 text-sm mb-3">
                     {currentScene.description}
                   </p>
                 )}
-                
+
                 {infoHotspots.length > 0 && (
                   <div>
-                    <h4 className="text-white font-medium mb-2 text-sm">Points of Interest:</h4>
+                    <h4 className="text-white font-medium mb-2 text-sm">
+                      Points of Interest:
+                    </h4>
                     <div className="space-y-1">
                       {infoHotspots.map((hotspot) => (
                         <div key={hotspot.id} className="text-gray-300 text-xs">
@@ -278,18 +300,22 @@ export function VRTourViewer({ scenes, currentSceneId, onSceneChange, onExit }: 
           <div className="absolute top-20 left-4 pointer-events-auto">
             <Card className="bg-black/80 border-white/20">
               <CardContent className="p-3">
-                <h3 className="text-white font-semibold mb-2 text-sm">Scenes</h3>
+                <h3 className="text-white font-semibold mb-2 text-sm">
+                  Scenes
+                </h3>
                 <div className="space-y-1">
                   {scenes.map((scene) => (
                     <Button
                       key={scene.id}
                       onClick={() => onSceneChange(scene.id)}
-                      variant={scene.id === currentSceneId ? "default" : "outline"}
+                      variant={
+                        scene.id === currentSceneId ? "default" : "outline"
+                      }
                       size="sm"
                       className={`w-full text-xs ${
                         scene.id === currentSceneId
-                          ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
-                          : 'bg-white/10 hover:bg-white/20 text-white border-white/20'
+                          ? "bg-emerald-600 hover:bg-emerald-700 text-white"
+                          : "bg-white/10 hover:bg-white/20 text-white border-white/20"
                       }`}
                     >
                       {scene.name}
@@ -313,13 +339,15 @@ export function VRTourViewer({ scenes, currentSceneId, onSceneChange, onExit }: 
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-auto">
             <Card className="bg-black/90 border-white/20">
               <CardContent className="p-4 text-center">
-                <h3 className="text-white font-semibold mb-2">{selectedHotspot.title}</h3>
+                <h3 className="text-white font-semibold mb-2">
+                  {selectedHotspot.title}
+                </h3>
                 {selectedHotspot.description && (
                   <p className="text-gray-300 text-sm mb-3">
                     {selectedHotspot.description}
                   </p>
                 )}
-                {selectedHotspot.type === 'navigation' ? (
+                {selectedHotspot.type === "navigation" ? (
                   <Badge className="bg-emerald-600 text-white">
                     Navigating...
                   </Badge>

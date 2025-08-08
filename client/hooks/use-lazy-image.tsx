@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from "react";
 
 interface UseLazyImageOptions {
   src: string;
@@ -6,10 +6,10 @@ interface UseLazyImageOptions {
   rootMargin?: string;
 }
 
-export function useLazyImage({ 
-  src, 
-  placeholder = '', 
-  rootMargin = '50px' 
+export function useLazyImage({
+  src,
+  placeholder = "",
+  rootMargin = "50px",
 }: UseLazyImageOptions) {
   const [imageSrc, setImageSrc] = useState(placeholder);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -35,7 +35,7 @@ export function useLazyImage({
           }
         });
       },
-      { rootMargin }
+      { rootMargin },
     );
 
     if (imgRef.current) {
@@ -51,6 +51,6 @@ export function useLazyImage({
     imgRef,
     imageSrc,
     isLoaded,
-    isError
+    isError,
   };
 }

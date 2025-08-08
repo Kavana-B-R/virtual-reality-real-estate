@@ -19,7 +19,7 @@ export interface Property {
     squareFeet: number;
     lotSize?: number;
     yearBuilt: number;
-    propertyType: 'house' | 'condo' | 'townhouse' | 'apartment';
+    propertyType: "house" | "condo" | "townhouse" | "apartment";
   };
   images: string[];
   vrTour: {
@@ -32,7 +32,7 @@ export interface Property {
     email: string;
     photo: string;
   };
-  status: 'for-sale' | 'pending' | 'sold';
+  status: "for-sale" | "pending" | "sold";
   listedDate: string;
   featured: boolean;
 }
@@ -48,7 +48,7 @@ export interface VRScene {
 export interface VRHotspot {
   id: string;
   position: { x: number; y: number; z: number };
-  type: 'navigation' | 'info';
+  type: "navigation" | "info";
   targetSceneId?: string; // For navigation hotspots
   title: string;
   description?: string;

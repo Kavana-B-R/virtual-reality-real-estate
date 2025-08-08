@@ -1,9 +1,19 @@
-import { Property } from '@shared/types';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Eye, MapPin, BedDouble, Bath, Square, Calendar, Phone, Mail, Headset } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Property } from "@shared/types";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Eye,
+  MapPin,
+  BedDouble,
+  Bath,
+  Square,
+  Calendar,
+  Phone,
+  Mail,
+  Headset,
+} from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface PropertyCardProps {
   property: Property;
@@ -13,15 +23,15 @@ export function PropertyCard({ property }: PropertyCardProps) {
   const navigate = useNavigate();
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
       minimumFractionDigits: 0,
     }).format(price);
   };
 
   const formatSquareFeet = (sqft: number) => {
-    return new Intl.NumberFormat('en-US').format(sqft);
+    return new Intl.NumberFormat("en-US").format(sqft);
   };
 
   const handleVRTour = () => {
@@ -52,7 +62,10 @@ export function PropertyCard({ property }: PropertyCardProps) {
           )}
         </div>
         <div className="absolute top-4 right-4">
-          <Badge variant="secondary" className="bg-white/90 text-gray-900 font-semibold">
+          <Badge
+            variant="secondary"
+            className="bg-white/90 text-gray-900 font-semibold"
+          >
             {formatPrice(property.price)}
           </Badge>
         </div>
@@ -62,11 +75,12 @@ export function PropertyCard({ property }: PropertyCardProps) {
         <h3 className="text-xl font-semibold text-gray-900 mb-2 line-clamp-2">
           {property.title}
         </h3>
-        
+
         <div className="flex items-center text-gray-600 mb-3">
           <MapPin className="w-4 h-4 mr-1" />
           <span className="text-sm">
-            {property.location.address}, {property.location.city}, {property.location.state}
+            {property.location.address}, {property.location.city},{" "}
+            {property.location.state}
           </span>
         </div>
 
@@ -85,7 +99,9 @@ export function PropertyCard({ property }: PropertyCardProps) {
           </div>
           <div className="flex items-center gap-1">
             <Square className="w-4 h-4 flex-shrink-0" />
-            <span className="truncate">{formatSquareFeet(property.features.squareFeet)} sqft</span>
+            <span className="truncate">
+              {formatSquareFeet(property.features.squareFeet)} sqft
+            </span>
           </div>
         </div>
 
@@ -96,7 +112,9 @@ export function PropertyCard({ property }: PropertyCardProps) {
             className="w-10 h-10 rounded-full object-cover"
           />
           <div className="flex-1">
-            <p className="font-medium text-sm text-gray-900">{property.agent.name}</p>
+            <p className="font-medium text-sm text-gray-900">
+              {property.agent.name}
+            </p>
             <div className="flex items-center gap-3 text-xs text-gray-600">
               <span className="flex items-center gap-1">
                 <Phone className="w-3 h-3" />
