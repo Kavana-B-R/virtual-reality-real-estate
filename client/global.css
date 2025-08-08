@@ -10,34 +10,59 @@
   */
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 210 20% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 210 20% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 210 20% 10%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 210 85% 16%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 210 10% 96%;
+    --secondary-foreground: 210 20% 10%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 10% 96%;
+    --muted-foreground: 210 15% 50%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 164 76% 39%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 210 15% 88%;
+    --input: 210 15% 88%;
+    --ring: 210 85% 16%;
 
     --radius: 0.5rem;
+
+    /* Luxury gold/bronze palette */
+    --luxury-50: 45 100% 97%;
+    --luxury-100: 44 96% 93%;
+    --luxury-200: 43 89% 85%;
+    --luxury-300: 42 78% 74%;
+    --luxury-400: 40 69% 63%;
+    --luxury-500: 38 60% 52%;
+    --luxury-600: 35 70% 42%;
+    --luxury-700: 30 65% 35%;
+    --luxury-800: 26 60% 28%;
+    --luxury-900: 22 55% 22%;
+    --luxury-950: 20 45% 12%;
+
+    /* Emerald green palette */
+    --emerald-50: 167 85% 96%;
+    --emerald-100: 164 82% 90%;
+    --emerald-200: 164 76% 81%;
+    --emerald-300: 164 76% 68%;
+    --emerald-400: 164 76% 53%;
+    --emerald-500: 164 76% 39%;
+    --emerald-600: 164 76% 31%;
+    --emerald-700: 164 76% 25%;
+    --emerald-800: 164 76% 20%;
+    --emerald-900: 164 76% 16%;
 
     --sidebar-background: 0 0% 98%;
 
