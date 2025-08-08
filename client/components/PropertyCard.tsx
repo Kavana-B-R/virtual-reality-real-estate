@@ -74,20 +74,18 @@ export function PropertyCard({ property }: PropertyCardProps) {
           {property.description}
         </p>
 
-        <div className="flex items-center justify-between text-sm text-gray-600 mb-4">
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-1">
-              <BedDouble className="w-4 h-4" />
-              <span>{property.features.bedrooms} bed</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <Bath className="w-4 h-4" />
-              <span>{property.features.bathrooms} bath</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <Square className="w-4 h-4" />
-              <span>{formatSquareFeet(property.features.squareFeet)} sqft</span>
-            </div>
+        <div className="grid grid-cols-3 gap-2 text-sm text-gray-600 mb-4">
+          <div className="flex items-center gap-1">
+            <BedDouble className="w-4 h-4 flex-shrink-0" />
+            <span className="truncate">{property.features.bedrooms} bed</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Bath className="w-4 h-4 flex-shrink-0" />
+            <span className="truncate">{property.features.bathrooms} bath</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Square className="w-4 h-4 flex-shrink-0" />
+            <span className="truncate">{formatSquareFeet(property.features.squareFeet)} sqft</span>
           </div>
         </div>
 
